@@ -1,0 +1,19 @@
+name: WorldTextures
+author: TfT_02
+main: me.tft02.worldtextures.WorldTextures
+description: Set a different texture pack for each world!
+dev-url: http://dev.bukkit.org/server-mods/worldtextures/
+version: 1.0
+commands:
+   worldtextures:
+      description: Get information about the plugin.
+      permission: worldtextures.worldtextures
+      permission-message: You don't have <permission>
+permissions:
+    worldtextures.*:
+        description: Gives access to all commands
+        children:
+            worldtextures.change_texturepack: true
+    worldtextures.change_texturepack:
+        description: Change texturepack for this player.
+        default: true
