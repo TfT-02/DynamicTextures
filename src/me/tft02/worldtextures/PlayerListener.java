@@ -4,6 +4,7 @@ import java.util.logging.Level;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -15,12 +16,12 @@ public class PlayerListener implements Listener {
 		plugin = instance;
 	}
 
-	@EventHandler
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		loadTexturePack(event.getPlayer());
 	}
 
-	@EventHandler
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerChangedWorldEvent(PlayerChangedWorldEvent event) {
 		loadTexturePack(event.getPlayer());
 	}
