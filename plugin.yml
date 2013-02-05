@@ -1,6 +1,6 @@
 name: WorldTextures
 author: TfT_02
-main: me.tft02.worldtextures.WorldTextures
+main: com.me.tft_02.worldtextures.WorldTextures
 description: Set a different texture pack for each world!
 dev-url: http://dev.bukkit.org/server-mods/worldtextures/
 version: 1.0

@@ -1,4 +1,4 @@
-package me.tft02.worldtextures;
+package com.me.tft_02.worldtextures;
 
 
 import org.bukkit.World;
