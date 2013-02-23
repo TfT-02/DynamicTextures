@@ -6,7 +6,10 @@ Key:
   ! Change
   - Removal
 
-Version 1.0 | Tested on CB 1.4.6-R0.2
+Version 1.1.0 | Tested on CB 1.4.7-R1.0
+ + Added dynamic permission nodes to set a texture pack for groups/users. Set the permission name in the config and use 'worldtextures.node-name'
+
+Version 1.0.0 | Tested on CB 1.4.6-R0.2
  + First release
  + Added config to set a texture pack for every world
  + Switches texture packs when player joins a world

@@ -3,7 +3,7 @@ author: TfT_02
 main: com.me.tft_02.worldtextures.WorldTextures
 description: Set a different texture pack for each world!
 dev-url: http://dev.bukkit.org/server-mods/worldtextures/
-version: 1.0
+version: 1.1.0
 commands:
    worldtextures:
       description: Get information about the plugin.
