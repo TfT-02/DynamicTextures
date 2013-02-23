@@ -7,32 +7,32 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class WorldTextures extends JavaPlugin {
 
-	private final PlayerListener playerListener = new PlayerListener(this);
+    private final PlayerListener playerListener = new PlayerListener(this);
 
-	/**
-	 * Run things on enable.
-	 */
-	@Override
-	public void onEnable() {
-		final PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(playerListener, this);
-		setupConfiguration();
-	}
+    /**
+     * Run things on enable.
+     */
+    @Override
+    public void onEnable() {
+        final PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(playerListener, this);
+        setupConfiguration();
+    }
 
-	private void setupConfiguration() {
-		final FileConfiguration config = this.getConfig();
-		for (World world : getServer().getWorlds()) {
-			config.addDefault("Worlds."+world.getName().toLowerCase(), "http://url_to_the_texture_pack_here");
-		}
+    private void setupConfiguration() {
+        final FileConfiguration config = this.getConfig();
+        for (World world : getServer().getWorlds()) {
+            config.addDefault("Worlds." + world.getName().toLowerCase(), "http://url_to_the_texture_pack_here");
+        }
         config.addDefault("Permissions.custom_perm_name", "http://url_to_the_texture_pack_here");
-		config.options().copyDefaults(true);
-		saveConfig();
-	}
+        config.options().copyDefaults(true);
+        saveConfig();
+    }
 
-	/**
-	 * Run things on disable.
-	 */
-	@Override
-	public void onDisable() {
-	}
+    /**
+     * Run things on disable.
+     */
+    @Override
+    public void onDisable() {
+    }
 }

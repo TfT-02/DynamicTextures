@@ -1,7 +1,6 @@
 package com.me.tft_02.worldtextures;
 
 import java.util.Arrays;
-import java.util.logging.Level;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
