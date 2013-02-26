@@ -40,7 +40,10 @@ public class PlayerListener implements Listener {
 
         for (String name : Arrays.asList(texturePermissions)) {
             if (player.hasPermission("dynamictextures." + name)) {
-                url = plugin.getConfig().getString("Permissions." + name);
+                String permission_url = plugin.getConfig().getString("Permissions." + name);
+                if ((permission_url.contains("http://") || permission_url.contains("https://")) && permission_url.contains(".zip")) {
+                    url = plugin.getConfig().getString("Permissions." + name);
+                }
             }
         }
 

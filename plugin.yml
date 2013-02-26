@@ -9,10 +9,6 @@ commands:
       description: Get information about the plugin.
       permission-message: You don't have <permission>
 permissions:
-    dynamictextures.*:
-        description: Gives access to all commands
-        children:
-            worldtextures.change_texturepack: true
     dynamictextures.change_texturepack:
         description: Change texturepack for this player.
         default: true
