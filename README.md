@@ -1,8 +1,8 @@
-[![WorldTextures][Banner]][GitHub]
-What is WorldTextures?
+[![DynamicTextures][Banner]][GitHub]
+What is DynamicTextures?
 ----------------
 
-WorldTextures is a Bukkit plugin which alows server admins to set a texturepack for each world. Player who switch from one world to another will have their texturepack automatically switched by the plugin.
+DynamicTextures is a Bukkit plugin which alows server admins to set a texturepack for each world. Player who switch from one world to another will have their texturepack automatically switched by the plugin.
 
 How does it work?
 ----------------
@@ -16,6 +16,6 @@ Who made this?
 
 Download here: [BukkitDev]
 
-[Banner]: https://dl.dropbox.com/u/29178507/Dev/WorldTextures/title_banner.png
+[Banner]: https://dl.dropbox.com/u/29178507/Dev/DynamicTextures/title_banner.png
 [BukkitDev]: http://dev.bukkit.org/server-mods/WorldTextures/
-[GitHub]: https://github.com/TfT-02/WorldTextures
+[GitHub]: https://github.com/TfT-02/DynamicTextures
