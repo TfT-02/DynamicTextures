@@ -5,6 +5,9 @@ Key:
   = Fix
   ! Change
   - Removal
+  
+Version 1.2.0 | Tested on CB 1.4.7-R1.0
+ ! Changed the name of the plugin from WorldTextures to DynamicTextures! All permissionnode names changed accordingly
 
 Version 1.1.0 | Tested on CB 1.4.7-R1.0
  + Added dynamic permission nodes to set a texture pack for groups/users. Set the permission name in the config and use 'worldtextures.node-name'

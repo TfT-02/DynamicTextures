@@ -1,19 +1,18 @@
-name: WorldTextures
+name: DynamicTextures
 author: TfT_02
-main: com.me.tft_02.worldtextures.WorldTextures
-description: Set a different texture pack for each world!
+main: com.me.tft_02.dynamictextures.DynamicTextures
+description: Multiple texturepacks for one server!
 dev-url: http://dev.bukkit.org/server-mods/worldtextures/
-version: 1.1.0
+version: 1.2.0
 commands:
-   worldtextures:
+   dynamictextures:
       description: Get information about the plugin.
-      permission: worldtextures.worldtextures
       permission-message: You don't have <permission>
 permissions:
-    worldtextures.*:
+    dynamictextures.*:
         description: Gives access to all commands
         children:
             worldtextures.change_texturepack: true
-    worldtextures.change_texturepack:
+    dynamictextures.change_texturepack:
         description: Change texturepack for this player.
         default: true

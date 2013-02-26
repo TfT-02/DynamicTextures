@@ -1,4 +1,4 @@
-package com.me.tft_02.worldtextures;
+package com.me.tft_02.dynamictextures;
 
 import java.util.Arrays;
 
@@ -10,9 +10,9 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerListener implements Listener {
-    WorldTextures plugin;
+    DynamicTextures plugin;
 
-    public PlayerListener(final WorldTextures instance) {
+    public PlayerListener(final DynamicTextures instance) {
         plugin = instance;
     }
 
@@ -27,7 +27,7 @@ public class PlayerListener implements Listener {
     }
 
     private void loadTexturePack(Player player) {
-        if (!player.hasPermission("worldtextures.change_texturepack")) {
+        if (!player.hasPermission("dynamictextures.change_texturepack")) {
             return;
         }
 
@@ -39,7 +39,7 @@ public class PlayerListener implements Listener {
         String[] texturePermissions = plugin.getConfig().getConfigurationSection("Permissions").getKeys(false).toArray(new String[0]);
 
         for (String name : Arrays.asList(texturePermissions)) {
-            if (player.hasPermission("worldtextures." + name)) {
+            if (player.hasPermission("dynamictextures." + name)) {
                 url = plugin.getConfig().getString("Permissions." + name);
             }
         }

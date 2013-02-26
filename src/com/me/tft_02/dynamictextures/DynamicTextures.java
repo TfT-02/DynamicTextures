@@ -1,11 +1,11 @@
-package com.me.tft_02.worldtextures;
+package com.me.tft_02.dynamictextures;
 
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class WorldTextures extends JavaPlugin {
+public class DynamicTextures extends JavaPlugin {
 
     private final PlayerListener playerListener = new PlayerListener(this);
 
