@@ -16,6 +16,6 @@ Who made this?
 
 Download here: [BukkitDev]
 
-[Banner]: https://dl.dropbox.com/u/29178507/Dev/DynamicTextures/title_banner.png
+[Banner]: https://dl.dropbox.com/u/29178507/Dev/DynamicTextures/title-banner.png
 [BukkitDev]: http://dev.bukkit.org/server-mods/WorldTextures/
 [GitHub]: https://github.com/TfT-02/DynamicTextures
