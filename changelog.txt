@@ -6,6 +6,9 @@ Key:
   ! Change
   - Removal
   
+Version 1.2.1 | Tested on CB 1.4.7-R1.0
+ = Fixed bug where texture packs weren't getting loaded onPlayerLogin
+  
 Version 1.2.0 | Tested on CB 1.4.7-R1.0
  ! Changed the name of the plugin from WorldTextures to DynamicTextures! All permissionnode names changed accordingly
  = Fixed a bug where world textures weren't loaded if the player is an OP

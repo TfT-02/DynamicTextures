@@ -17,8 +17,13 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        loadTexturePack(event.getPlayer());
+    public void onPlayerJoin(final PlayerJoinEvent event) {
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+            @Override
+            public void run() {
+                loadTexturePack(event.getPlayer());
+            }
+        }, 20);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
