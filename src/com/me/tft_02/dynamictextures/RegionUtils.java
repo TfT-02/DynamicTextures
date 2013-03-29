@@ -1,15 +1,18 @@
 package com.me.tft_02.dynamictextures;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class RegionUtils {
+    public static HashMap<String, String> regionData = new HashMap<String, String>();
 
     public static boolean isTexturedRegion(Location location) {
         if (getRegionTexturePackUrl(getRegion(location)) != null) {
@@ -23,13 +26,14 @@ public class RegionUtils {
 
         String url = null;
         for (String name : Arrays.asList(worldGuardRegions)) {
-            if (region.equals(name)) {
+            if (region.equalsIgnoreCase("[" + name + "]")) {
                 String temp_url = DynamicTextures.getInstance().getConfig().getString("WorldGuard_Regions." + name);
                 if ((temp_url.contains("http://") || temp_url.contains("https://")) && temp_url.contains(".zip")) {
                     url = DynamicTextures.getInstance().getConfig().getString("WorldGuard_Regions." + name);
                 }
             }
         }
+
         return url;
     }
 
@@ -53,5 +57,18 @@ public class RegionUtils {
             regions.remove(name);
         }
         return regions.toString();
+    }
+
+    public static String getPreviousRegion(Player player) {
+        String playerName = player.getName();
+        String region;
+
+        if (regionData.containsKey(playerName)) {
+            region = regionData.get(playerName);
+        }
+        else {
+            region = null;
+        }
+        return region;
     }
 }

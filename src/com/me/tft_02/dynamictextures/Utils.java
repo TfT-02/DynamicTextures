@@ -30,7 +30,11 @@ public class Utils {
         }
 
         if (DynamicTextures.getInstance().worldGuardEnabled && RegionUtils.isTexturedRegion(location)) {
-            url = RegionUtils.getRegionTexturePackUrl(RegionUtils.getRegion(location));
+            String region = RegionUtils.getRegion(location);
+
+            if (!RegionUtils.getPreviousRegion(player).equals(region)) {   
+                url = RegionUtils.getRegionTexturePackUrl(region);
+            }
         }
 
         if ((url != null) && (url.contains("http://") || url.contains("https://")) && url.contains(".zip")) {
