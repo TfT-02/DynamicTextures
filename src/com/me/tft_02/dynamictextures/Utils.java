@@ -32,7 +32,8 @@ public class Utils {
         if (DynamicTextures.getInstance().worldGuardEnabled && RegionUtils.isTexturedRegion(location)) {
             String region = RegionUtils.getRegion(location);
 
-            if (!RegionUtils.getPreviousRegion(player).equals(region)) {   
+            if (!RegionUtils.getPreviousRegion(player).equals(region)) {
+                RegionUtils.regionData.put(player.getName(), region);
                 url = RegionUtils.getRegionTexturePackUrl(region);
             }
         }
