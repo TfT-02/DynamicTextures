@@ -3,7 +3,7 @@ package com.me.tft_02.dynamictextures;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class RegionTimer  implements Runnable {
+public class RegionTimer implements Runnable {
     DynamicTextures plugin;
 
     public RegionTimer(final DynamicTextures instance) {
