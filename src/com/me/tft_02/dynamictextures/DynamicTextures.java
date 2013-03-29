@@ -31,6 +31,8 @@ public class DynamicTextures extends JavaPlugin {
         setupConfiguration();
         setupWorldGuard();
 
+        getCommand("dynamictextures").setExecutor(new Commands(this));
+        
         BukkitScheduler scheduler = getServer().getScheduler();
         if (worldGuardEnabled) {
             //Region check timer (Runs every five seconds)
