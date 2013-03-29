@@ -20,8 +20,15 @@ public class RegionTimer implements Runnable {
             Location location = player.getLocation();
 
             if (RegionUtils.isTexturedRegion(location)) {
-                String url = RegionUtils.getRegionTexturePackUrl(RegionUtils.getRegion(location));
+                String region = RegionUtils.getRegion(location);
+
+                if (RegionUtils.getPreviousRegion(player).equals(region)) {
+                    return;
+                }
+
+                String url = RegionUtils.getRegionTexturePackUrl(region);
                 player.setTexturePack(url);
+                RegionUtils.regionData.put(player.getName(), region);
             }
         }
     }
