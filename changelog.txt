@@ -6,6 +6,8 @@ Key:
   ! Change
   - Removal
   
+Version 1.2.3 | Tested on CB 1.4.7-R1.0
+  
 Version 1.2.2 | Tested on CB 1.4.7-R1.0
  + Added WorldGuard support, set regional textures in config.yml
  + Added command to reload the configuration files
