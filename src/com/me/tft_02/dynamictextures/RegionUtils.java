@@ -61,13 +61,10 @@ public class RegionUtils {
 
     public static String getPreviousRegion(Player player) {
         String playerName = player.getName();
-        String region;
+        String region = "null";
 
         if (regionData.containsKey(playerName)) {
             region = regionData.get(playerName);
-        }
-        else {
-            region = null;
         }
         return region;
     }
