@@ -3,7 +3,8 @@ author: TfT_02
 main: com.me.tft_02.dynamictextures.DynamicTextures
 description: Multiple texturepacks for one server!
 dev-url: http://dev.bukkit.org/server-mods/worldtextures/
-version: 1.2.1
+version: 1.2.2
+softdepend: [WorldGuard]
 commands:
    dynamictextures:
       description: Get information about the plugin.
