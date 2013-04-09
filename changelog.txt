@@ -7,6 +7,9 @@ Key:
   - Removal
   
 Version 1.2.3 | Tested on CB 1.4.7-R1.0
+ + Added command to refresh the texturepacks of all players
+ + Added update checker
+ + Added metrics
   
 Version 1.2.2 | Tested on CB 1.4.7-R1.0
  + Added WorldGuard support, set regional textures in config.yml
