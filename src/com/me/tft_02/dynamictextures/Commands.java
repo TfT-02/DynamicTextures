@@ -20,6 +20,9 @@ public class Commands implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("reload")) {
                     return reloadConfiguration(sender);
                 }
+                else if (args[0].equalsIgnoreCase("refreshall")) {
+                    return refreshAllPlayers(sender);
+                }
             }
             else {
                 return printUsage(sender);
@@ -30,7 +33,17 @@ public class Commands implements CommandExecutor {
 
     private boolean printUsage(CommandSender sender) {
         sender.sendMessage("Usage: /dynamictextures [reload]");
-        return false;
+        return true;
+    }
+
+    private boolean refreshAllPlayers(CommandSender sender) {
+        sender.sendMessage(ChatColor.GREEN + "Refreshing textures for all players.");
+
+        for (Player player : plugin.getServer().getOnlinePlayers()) {
+            Utils.loadTexturePack(player);
+        }
+
+        return true;
     }
 
     private boolean reloadConfiguration(CommandSender sender) {
@@ -41,6 +54,6 @@ public class Commands implements CommandExecutor {
             Utils.loadTexturePack((Player) sender);
         }
 
-        return false;
+        return true;
     }
 }
