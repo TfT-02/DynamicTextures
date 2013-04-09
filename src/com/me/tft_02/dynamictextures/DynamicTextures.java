@@ -1,5 +1,9 @@
 package com.me.tft_02.dynamictextures;
 
+import java.io.IOException;
+import java.util.logging.Level;
+
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -15,6 +19,9 @@ public class DynamicTextures extends JavaPlugin {
     private final PlayerListener playerListener = new PlayerListener(this);
 
     public boolean worldGuardEnabled = false;
+
+    // Update Check
+    public boolean updateAvailable;
 
     public static DynamicTextures getInstance() {
         return instance;
@@ -38,10 +45,24 @@ public class DynamicTextures extends JavaPlugin {
             //Region check timer (Runs every five seconds)
             scheduler.scheduleSyncRepeatingTask(this, new RegionTimer(this), 0, 5 * 20);
         }
+
+        checkForUpdates();
+
+        if (getConfig().getBoolean("General.stats_tracking_enabled")) {
+            try {
+                Metrics metrics = new Metrics(this);
+                metrics.start();
+            }
+            catch (IOException e) {
+                System.out.println("Failed to submit stats.");
+            }
+        }
     }
 
     private void setupConfiguration() {
         final FileConfiguration config = this.getConfig();
+        config.addDefault("General.stats_tracking_enabled", true);
+        config.addDefault("General.update_check_enabled", true);
         for (World world : getServer().getWorlds()) {
             config.addDefault("Worlds." + world.getName().toLowerCase(), "http://url_to_the_texture_pack_here");
         }
@@ -74,5 +95,21 @@ public class DynamicTextures extends JavaPlugin {
     @Override
     public void onDisable() {
         this.getServer().getScheduler().cancelTasks(this);
+    }
+
+    private void checkForUpdates() {
+        if (getConfig().getBoolean("General.update_check_enabled")) {
+            try {
+                updateAvailable = UpdateChecker.updateAvailable();
+            }
+            catch (Exception e) {
+                updateAvailable = false;
+            }
+
+            if (updateAvailable) {
+                this.getLogger().log(Level.INFO, ChatColor.GOLD + "DynamicTextures is outdated!");
+                this.getLogger().log(Level.INFO, ChatColor.AQUA + "http://dev.bukkit.org/server-mods/worldtextures/");
+            }
+        }
     }
 }
