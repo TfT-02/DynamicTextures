@@ -6,10 +6,11 @@ Key:
   ! Change
   - Removal
   
-Version 1.2.3 | Tested on CB 1.4.7-R1.0
+Version 1.2.3 | Tested on CB 1.5.2-R0.1
  + Added command to refresh the texturepacks of all players
- + Added update checker
- + Added metrics
+ + Added an Update Checker
+ + Added Metrics
+ = Fixed issues where worlds were not being detected
   
 Version 1.2.2 | Tested on CB 1.4.7-R1.0
  + Added WorldGuard support, set regional textures in config.yml
