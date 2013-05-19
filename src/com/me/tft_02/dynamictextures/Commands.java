@@ -12,6 +12,8 @@ public class Commands implements CommandExecutor {
     public Commands(DynamicTextures instance) {
         plugin = instance;
     }
+    
+    String noPermission = ChatColor.DARK_RED + "You don't have permission to use this!";
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -24,29 +26,55 @@ public class Commands implements CommandExecutor {
                     return refreshAllPlayers(sender);
                 }
             }
-            else {
-                return printUsage(sender);
-            }
+            return printUsage(sender);
         }
         return false;
     }
 
     private boolean printUsage(CommandSender sender) {
-        sender.sendMessage("Usage: /dynamictextures [reload]");
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+
+            player.sendMessage(ChatColor.GRAY + "-----[ " + ChatColor.GOLD + "DynamicTextures" + ChatColor.GRAY + " ]----- by " + ChatColor.GOLD + "TfT_02");
+
+            String version = DynamicTextures.getInstance().getDescription().getVersion();
+            String status = ChatColor.GREEN + "LATEST";
+            if (plugin.updateAvailable) {
+                status = ChatColor.RED + "OUTDATED";
+            }
+
+            player.sendMessage(ChatColor.GRAY + "Running version: "  + ChatColor.DARK_AQUA + version + " " + status);
+            player.sendMessage("Usage: /dynamictextures [reload]");
+            player.sendMessage("Usage: /dynamictextures [refreshall]");
+        } else {
+            sender.sendMessage("Usage: /dynamictextures [reload]");
+            sender.sendMessage("Usage: /dynamictextures [refreshall]");
+        }
         return true;
     }
 
     private boolean refreshAllPlayers(CommandSender sender) {
+        if (!sender.hasPermission("dynamictextures.commands.refreshall")) {
+            sender.sendMessage(noPermission);
+            return false;
+        }
+
         sender.sendMessage(ChatColor.GREEN + "Refreshing textures for all players.");
 
-        for (Player player : plugin.getServer().getOnlinePlayers()) {
+        for (Player player : DynamicTextures.getInstance().getServer().getOnlinePlayers()) {
             Utils.loadTexturePack(player);
+            player.sendMessage(ChatColor.GREEN + "Refreshing textures...");
         }
 
         return true;
     }
 
     private boolean reloadConfiguration(CommandSender sender) {
+        if (!sender.hasPermission("dynamictextures.commands.reload")) {
+            sender.sendMessage(noPermission);
+            return false;
+        }
+
         plugin.reloadConfig();
         sender.sendMessage(ChatColor.GREEN + "Configuration reloaded.");
 

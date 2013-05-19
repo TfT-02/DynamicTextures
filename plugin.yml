@@ -4,12 +4,18 @@ main: com.me.tft_02.dynamictextures.DynamicTextures
 description: Multiple texturepacks for one server!
 dev-url: http://dev.bukkit.org/server-mods/worldtextures/
 version: 1.2.3
-softdepend: [WorldGuard]
+softdepend: [Multiverse, WorldGuard]
 commands:
    dynamictextures:
       description: Get information about the plugin.
       permission-message: You don't have <permission>
 permissions:
+    dynamictextures.commands.reload:
+        description: Allow use of the /dynamictextures reload command
+        default: OP
+    dynamictextures.commands.refreshall:
+        description: Allow use of the /dynamictextures refreshall command
+        default: OP
     dynamictextures.change_texturepack:
         description: Change texturepack for this player.
         default: true
