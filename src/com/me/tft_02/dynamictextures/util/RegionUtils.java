@@ -1,4 +1,4 @@
-package com.me.tft_02.dynamictextures.worldguard;
+package com.me.tft_02.dynamictextures.util;
 
 import java.util.Arrays;
 import java.util.HashMap;

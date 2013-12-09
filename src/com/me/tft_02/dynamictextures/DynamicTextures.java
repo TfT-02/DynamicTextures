@@ -12,8 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.me.tft_02.dynamictextures.commands.Commands;
 import com.me.tft_02.dynamictextures.listeners.PlayerListener;
+import com.me.tft_02.dynamictextures.runnables.RegionTimerTask;
 import com.me.tft_02.dynamictextures.util.Metrics;
-import com.me.tft_02.dynamictextures.worldguard.RegionTimer;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import net.gravitydevelopment.updater.dynamictextures.Updater;
@@ -46,7 +46,7 @@ public class DynamicTextures extends JavaPlugin {
 
         if (worldGuardEnabled) {
             //Region check timer (Runs every five seconds)
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new RegionTimer(this), 0, 5 * 20);
+            new RegionTimerTask().runTaskTimer(this, 0, 5 * 20);
         }
 
         checkForUpdates();

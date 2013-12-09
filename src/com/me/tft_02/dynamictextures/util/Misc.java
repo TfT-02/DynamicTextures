@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.Messenger;
 
 import com.me.tft_02.dynamictextures.DynamicTextures;
-import com.me.tft_02.dynamictextures.worldguard.RegionUtils;
 
 import com.google.common.base.Charsets;
 import net.minecraft.server.v1_7_R1.PacketPlayOutCustomPayload;
