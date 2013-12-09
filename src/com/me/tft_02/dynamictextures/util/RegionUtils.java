@@ -28,11 +28,13 @@ public class RegionUtils {
 
         String url = null;
         for (String name : Arrays.asList(worldGuardRegions)) {
-            if (region.equalsIgnoreCase("[" + name + "]")) {
-                String temp_url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + name);
-                if ((temp_url.contains("http://") || temp_url.contains("https://")) && temp_url.contains(".zip")) {
-                    url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + name);
-                }
+            if (!region.equalsIgnoreCase("[" + name + "]")) {
+                break;
+            }
+
+            String temp_url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + name);
+            if ((temp_url.contains("http://") || temp_url.contains("https://")) && temp_url.contains(".zip")) {
+                url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + name);
             }
         }
 

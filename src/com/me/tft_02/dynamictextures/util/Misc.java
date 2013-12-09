@@ -52,16 +52,14 @@ public class Misc {
     }
 
     public static void setTexturePack(Player player, String url) {
-        boolean sendPackets = false;
-
-        if (sendPackets) {
+        if (DynamicTextures.p.getConfig().getBoolean("General.Use_Packets")) {
             try {
-            Validate.notNull(url, "Resource pack URL cannot be null");
+                Validate.notNull(url, "Resource pack URL cannot be null");
 
-            byte[] message = url.getBytes(Charsets.UTF_8);
-            Validate.isTrue(message.length <= Messenger.MAX_MESSAGE_SIZE, "Resource pack URL is too long");
+                byte[] message = url.getBytes(Charsets.UTF_8);
+                Validate.isTrue(message.length <= Messenger.MAX_MESSAGE_SIZE, "Resource pack URL is too long");
 
-            ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|RPack", message));
+                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|RPack", message));
             }
             catch (Exception e) {
                 DynamicTextures.p.getLogger().warning("Sending packets failed, plugin probably outdated!");

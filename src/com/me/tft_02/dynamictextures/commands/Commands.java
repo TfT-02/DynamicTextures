@@ -29,24 +29,14 @@ public class Commands implements CommandExecutor {
     }
 
     private boolean printUsage(CommandSender sender) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
+        sender.sendMessage(ChatColor.GRAY + "-----[ " + ChatColor.GOLD + "DynamicTextures" + ChatColor.GRAY + " ]----- by " + ChatColor.GOLD + "TfT_02");
 
-            player.sendMessage(ChatColor.GRAY + "-----[ " + ChatColor.GOLD + "DynamicTextures" + ChatColor.GRAY + " ]----- by " + ChatColor.GOLD + "TfT_02");
+        String version = DynamicTextures.p.getDescription().getVersion();
+        String status = DynamicTextures.p.updateAvailable ? ChatColor.RED + "OUTDATED" : ChatColor.GREEN + "LATEST";
 
-            String version = DynamicTextures.p.getDescription().getVersion();
-            String status = ChatColor.GREEN + "LATEST";
-            if (DynamicTextures.p.updateAvailable) {
-                status = ChatColor.RED + "OUTDATED";
-            }
-
-            player.sendMessage(ChatColor.GRAY + "Running version: "  + ChatColor.DARK_AQUA + version + " " + status);
-            player.sendMessage("Usage: /dynamictextures [reload]");
-            player.sendMessage("Usage: /dynamictextures [refreshall]");
-        } else {
-            sender.sendMessage("Usage: /dynamictextures [reload]");
-            sender.sendMessage("Usage: /dynamictextures [refreshall]");
-        }
+        sender.sendMessage(ChatColor.GRAY + "Running version: " + ChatColor.DARK_AQUA + version + " " + status);
+        sender.sendMessage("Usage: /dynamictextures [reload]");
+        sender.sendMessage("Usage: /dynamictextures [refreshall]");
         return true;
     }
 
