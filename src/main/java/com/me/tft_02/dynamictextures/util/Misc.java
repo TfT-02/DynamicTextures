@@ -16,7 +16,7 @@ import org.apache.commons.lang.Validate;
 public class Misc {
 
     public static void loadTexturePack(Player player) {
-        if (!player.hasPermission("dynamictextures.change_texturepack")) {
+        if (!player.hasPermission("dynamictextures.resourcepack")) {
             return;
         }
 
