@@ -13,12 +13,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.me.tft_02.dynamictextures.commands.Commands;
 import com.me.tft_02.dynamictextures.listeners.PlayerListener;
 import com.me.tft_02.dynamictextures.runnables.RegionTimerTask;
-import com.me.tft_02.dynamictextures.util.Metrics;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import net.gravitydevelopment.updater.dynamictextures.Updater;
 import net.gravitydevelopment.updater.dynamictextures.Updater.UpdateResult;
 import net.gravitydevelopment.updater.dynamictextures.Updater.UpdateType;
+import org.mcstats.Metrics;
 
 public class DynamicTextures extends JavaPlugin {
     public static DynamicTextures p;
