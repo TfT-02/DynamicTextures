@@ -10,12 +10,6 @@ import com.me.tft_02.dynamictextures.DynamicTextures;
 import com.me.tft_02.dynamictextures.util.Misc;
 
 public class Commands implements CommandExecutor {
-    DynamicTextures plugin;
-
-    public Commands(DynamicTextures instance) {
-        plugin = instance;
-    }
-    
     String noPermission = ChatColor.DARK_RED + "You don't have permission to use this!";
 
     @Override
@@ -40,9 +34,9 @@ public class Commands implements CommandExecutor {
 
             player.sendMessage(ChatColor.GRAY + "-----[ " + ChatColor.GOLD + "DynamicTextures" + ChatColor.GRAY + " ]----- by " + ChatColor.GOLD + "TfT_02");
 
-            String version = DynamicTextures.getInstance().getDescription().getVersion();
+            String version = DynamicTextures.p.getDescription().getVersion();
             String status = ChatColor.GREEN + "LATEST";
-            if (plugin.updateAvailable) {
+            if (DynamicTextures.p.updateAvailable) {
                 status = ChatColor.RED + "OUTDATED";
             }
 
@@ -64,7 +58,7 @@ public class Commands implements CommandExecutor {
 
         sender.sendMessage(ChatColor.GREEN + "Refreshing textures for all players.");
 
-        for (Player player : DynamicTextures.getInstance().getServer().getOnlinePlayers()) {
+        for (Player player : DynamicTextures.p.getServer().getOnlinePlayers()) {
             Misc.loadTexturePack(player);
             player.sendMessage(ChatColor.GREEN + "Refreshing textures...");
         }
@@ -78,7 +72,7 @@ public class Commands implements CommandExecutor {
             return false;
         }
 
-        plugin.reloadConfig();
+        DynamicTextures.p.reloadConfig();
         sender.sendMessage(ChatColor.GREEN + "Configuration reloaded.");
 
         if (sender instanceof Player) {

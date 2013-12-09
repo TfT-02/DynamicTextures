@@ -1,14 +1,21 @@
 name: DynamicTextures
-author: TfT_02
-main: com.me.tft_02.dynamictextures.DynamicTextures
-description: Multiple texturepacks for one server!
-dev-url: http://dev.bukkit.org/server-mods/worldtextures/
 version: 1.3.0
+description: >
+  Multiple ResourcePacks for one server! With DynamicTextures you can set
+  a ResourcePack for each world, or even WorldGuard region.
+
+author: TfT_02
+website: http://dev.bukkit.org/server-mods/worldtextures/
+
+main: com.me.tft_02.dynamictextures.DynamicTextures
 softdepend: [Multiverse-Core, WorldGuard]
+load: POSTWORLD
+
 commands:
    dynamictextures:
       description: Get information about the plugin.
       permission-message: You don't have <permission>
+
 permissions:
     dynamictextures.commands.reload:
         description: Allow use of the /dynamictextures reload command
@@ -16,6 +23,6 @@ permissions:
     dynamictextures.commands.refreshall:
         description: Allow use of the /dynamictextures refreshall command
         default: OP
-    dynamictextures.change_texturepack:
-        description: Change texturepack for this player.
+    dynamictextures.resourcepack:
+        description: Change ResourcePacks for this player.
         default: true

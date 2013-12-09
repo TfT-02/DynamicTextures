@@ -24,14 +24,14 @@ public class RegionUtils {
     }
 
     public static String getRegionTexturePackUrl(String region) {
-        String[] worldGuardRegions = DynamicTextures.getInstance().getConfig().getConfigurationSection("WorldGuard_Regions").getKeys(false).toArray(new String[0]);
+        String[] worldGuardRegions = DynamicTextures.p.getConfig().getConfigurationSection("WorldGuard_Regions").getKeys(false).toArray(new String[0]);
 
         String url = null;
         for (String name : Arrays.asList(worldGuardRegions)) {
             if (region.equalsIgnoreCase("[" + name + "]")) {
-                String temp_url = DynamicTextures.getInstance().getConfig().getString("WorldGuard_Regions." + name);
+                String temp_url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + name);
                 if ((temp_url.contains("http://") || temp_url.contains("https://")) && temp_url.contains(".zip")) {
-                    url = DynamicTextures.getInstance().getConfig().getString("WorldGuard_Regions." + name);
+                    url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + name);
                 }
             }
         }
@@ -40,7 +40,7 @@ public class RegionUtils {
     }
 
     public static String getRegion(Location location) {
-        RegionManager regionManager = DynamicTextures.getInstance().getWorldGuard().getRegionManager(location.getWorld());
+        RegionManager regionManager = DynamicTextures.p.getWorldGuard().getRegionManager(location.getWorld());
         ApplicableRegionSet set = regionManager.getApplicableRegions(location);
         LinkedList<String> parentNames = new LinkedList<String>();
         LinkedList<String> regions = new LinkedList<String>();

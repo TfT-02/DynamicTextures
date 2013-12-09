@@ -1,7 +1,7 @@
 package com.me.tft_02.dynamictextures;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -9,73 +9,59 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
 
 import com.me.tft_02.dynamictextures.commands.Commands;
 import com.me.tft_02.dynamictextures.listeners.PlayerListener;
 import com.me.tft_02.dynamictextures.util.Metrics;
-import com.me.tft_02.dynamictextures.util.UpdateChecker;
 import com.me.tft_02.dynamictextures.worldguard.RegionTimer;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import net.gravitydevelopment.updater.dynamictextures.Updater;
+import net.gravitydevelopment.updater.dynamictextures.Updater.UpdateResult;
+import net.gravitydevelopment.updater.dynamictextures.Updater.UpdateType;
 
 public class DynamicTextures extends JavaPlugin {
-    public static DynamicTextures instance;
-
-    private final PlayerListener playerListener = new PlayerListener(this);
+    public static DynamicTextures p;
+    public static File dynamictextures;
 
     public boolean worldGuardEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
 
-    public static DynamicTextures getInstance() {
-        return instance;
-    }
-
     /**
      * Run things on enable.
      */
     @Override
     public void onEnable() {
-        instance = this;
-        final PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(playerListener, this);
+        p = this;
         setupConfiguration();
+
+        registerEvents();
+
         setupWorldGuard();
+        setupFilePaths();
 
-        getCommand("dynamictextures").setExecutor(new Commands(this));
+        getCommand("dynamictextures").setExecutor(new Commands());
 
-        BukkitScheduler scheduler = getServer().getScheduler();
         if (worldGuardEnabled) {
             //Region check timer (Runs every five seconds)
-            scheduler.scheduleSyncRepeatingTask(this, new RegionTimer(this), 0, 5 * 20);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new RegionTimer(this), 0, 5 * 20);
         }
 
         checkForUpdates();
 
-        if (getConfig().getBoolean("General.stats_tracking_enabled")) {
-            try {
-                Metrics metrics = new Metrics(this);
-                metrics.start();
-            }
-            catch (IOException e) {
-                System.out.println("Failed to submit stats.");
-            }
-        }
+        setupMetrics();
     }
 
-    private void setupConfiguration() {
-        final FileConfiguration config = this.getConfig();
-        config.addDefault("General.stats_tracking_enabled", true);
-        config.addDefault("General.update_check_enabled", true);
-        for (World world : getServer().getWorlds()) {
-            config.addDefault("Worlds." + world.getName().toLowerCase(), "http://url_to_the_resource_pack_here");
-        }
-        config.addDefault("Permissions.custom_perm_name", "http://url_to_the_resource_pack_here");
-        config.addDefault("WorldGuard_Regions.region_name", "http://url_to_the_resource_pack_here");
-        config.options().copyDefaults(true);
-        saveConfig();
+    /**
+     * Registers all event listeners
+     */
+    private void registerEvents() {
+        PluginManager pluginManager = getServer().getPluginManager();
+
+        // Register events
+        pluginManager.registerEvents(new PlayerListener(), this);
     }
 
     private void setupWorldGuard() {
@@ -85,7 +71,7 @@ public class DynamicTextures extends JavaPlugin {
         }
     }
 
-    WorldGuardPlugin getWorldGuard() {
+    public WorldGuardPlugin getWorldGuard() {
         Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
 
         if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
@@ -93,6 +79,23 @@ public class DynamicTextures extends JavaPlugin {
         }
 
         return (WorldGuardPlugin) plugin;
+    }
+
+    public boolean getWorldGuardEnabled() {
+        return worldGuardEnabled;
+    }
+
+    private void setupConfiguration() {
+        final FileConfiguration config = this.getConfig();
+        config.addDefault("General.Stats_Tracking", true);
+        config.addDefault("General.Update_Check", true);
+        for (World world : getServer().getWorlds()) {
+            config.addDefault("Worlds." + world.getName().toLowerCase(), "http://url_to_the_resource_pack_here");
+        }
+        config.addDefault("Permissions.custom_perm_name", "http://url_to_the_resource_pack_here");
+        config.addDefault("WorldGuard_Regions.region_name", "http://url_to_the_resource_pack_here");
+        config.options().copyDefaults(true);
+        saveConfig();
     }
 
     /**
@@ -103,19 +106,41 @@ public class DynamicTextures extends JavaPlugin {
         this.getServer().getScheduler().cancelTasks(this);
     }
 
-    private void checkForUpdates() {
-        if (getConfig().getBoolean("General.update_check_enabled")) {
-            try {
-                updateAvailable = UpdateChecker.updateAvailable();
-            }
-            catch (Exception e) {
-                updateAvailable = false;
-            }
+    /**
+     * Setup the various storage file paths
+     */
+    private void setupFilePaths() {
+        dynamictextures = getFile();
+    }
 
-            if (updateAvailable) {
-                this.getLogger().log(Level.INFO, ChatColor.GOLD + "DynamicTextures is outdated!");
-                this.getLogger().log(Level.INFO, ChatColor.AQUA + "http://dev.bukkit.org/server-mods/worldtextures/");
-            }
+    private void checkForUpdates() {
+        if (!getConfig().getBoolean("General.Update_Check")) {
+            return;
+        }
+
+        Updater updater = new Updater(this, 48782, dynamictextures, UpdateType.NO_DOWNLOAD, false);
+
+        if (updater.getResult() != UpdateResult.UPDATE_AVAILABLE) {
+            this.updateAvailable = false;
+            return;
+        }
+
+        this.updateAvailable = true;
+        this.getLogger().info(ChatColor.GOLD + "DynamicTextures is outdated!");
+        this.getLogger().info(ChatColor.AQUA + "http://dev.bukkit.org/server-mods/worldtextures/");
+    }
+
+    private void setupMetrics() {
+        if (!getConfig().getBoolean("General.Stats_Tracking")) {
+            return;
+        }
+
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+        }
+        catch (IOException e) {
+            System.out.println("Failed to submit stats.");
         }
     }
 }
