@@ -11,7 +11,11 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import com.me.tft_02.dynamictextures.commands.Commands;
+import com.me.tft_02.dynamictextures.listeners.PlayerListener;
 import com.me.tft_02.dynamictextures.util.Metrics;
+import com.me.tft_02.dynamictextures.util.UpdateChecker;
+import com.me.tft_02.dynamictextures.worldguard.RegionTimer;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 

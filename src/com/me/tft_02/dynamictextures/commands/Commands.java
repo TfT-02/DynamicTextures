@@ -1,10 +1,13 @@
-package com.me.tft_02.dynamictextures;
+package com.me.tft_02.dynamictextures.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.me.tft_02.dynamictextures.DynamicTextures;
+import com.me.tft_02.dynamictextures.util.Misc;
 
 public class Commands implements CommandExecutor {
     DynamicTextures plugin;
@@ -62,7 +65,7 @@ public class Commands implements CommandExecutor {
         sender.sendMessage(ChatColor.GREEN + "Refreshing textures for all players.");
 
         for (Player player : DynamicTextures.getInstance().getServer().getOnlinePlayers()) {
-            Utils.loadTexturePack(player);
+            Misc.loadTexturePack(player);
             player.sendMessage(ChatColor.GREEN + "Refreshing textures...");
         }
 
@@ -79,7 +82,7 @@ public class Commands implements CommandExecutor {
         sender.sendMessage(ChatColor.GREEN + "Configuration reloaded.");
 
         if (sender instanceof Player) {
-            Utils.loadTexturePack((Player) sender);
+            Misc.loadTexturePack((Player) sender);
         }
 
         return true;

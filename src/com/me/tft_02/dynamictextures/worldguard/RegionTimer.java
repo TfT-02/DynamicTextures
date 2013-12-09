@@ -1,7 +1,10 @@
-package com.me.tft_02.dynamictextures;
+package com.me.tft_02.dynamictextures.worldguard;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import com.me.tft_02.dynamictextures.DynamicTextures;
+import com.me.tft_02.dynamictextures.util.Misc;
 
 public class RegionTimer implements Runnable {
     DynamicTextures plugin;
@@ -27,7 +30,7 @@ public class RegionTimer implements Runnable {
                 }
 
                 String url = RegionUtils.getRegionTexturePackUrl(region);
-                Utils.setTexturePack(player, url);
+                Misc.setTexturePack(player, url);
                 RegionUtils.regionData.put(player.getName(), region);
             }
         }

@@ -1,4 +1,4 @@
-package com.me.tft_02.dynamictextures;
+package com.me.tft_02.dynamictextures.worldguard;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import com.me.tft_02.dynamictextures.DynamicTextures;
 
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;

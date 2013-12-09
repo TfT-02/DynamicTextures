@@ -1,10 +1,13 @@
-package com.me.tft_02.dynamictextures;
+package com.me.tft_02.dynamictextures.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import com.me.tft_02.dynamictextures.DynamicTextures;
+import com.me.tft_02.dynamictextures.util.Misc;
 
 public class PlayerListener implements Listener {
     DynamicTextures plugin;
@@ -18,13 +21,13 @@ public class PlayerListener implements Listener {
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
             public void run() {
-                Utils.loadTexturePack(event.getPlayer());
+                Misc.loadTexturePack(event.getPlayer());
             }
         }, 20);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerChangedWorldEvent(PlayerChangedWorldEvent event) {
-        Utils.loadTexturePack(event.getPlayer());
+        Misc.loadTexturePack(event.getPlayer());
     }
 }

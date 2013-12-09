@@ -1,4 +1,4 @@
-package com.me.tft_02.dynamictextures;
+package com.me.tft_02.dynamictextures.util;
 
 import java.util.Arrays;
 
@@ -10,9 +10,12 @@ import org.bukkit.craftbukkit.v1_7_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.Messenger;
 
+import com.me.tft_02.dynamictextures.DynamicTextures;
+import com.me.tft_02.dynamictextures.worldguard.RegionUtils;
+
 import com.google.common.base.Charsets;
 
-public class Utils {
+public class Misc {
 
     public static void loadTexturePack(Player player) {
         if (!player.hasPermission("dynamictextures.change_texturepack")) {
