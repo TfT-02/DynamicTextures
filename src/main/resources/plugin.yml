@@ -1,5 +1,5 @@
 name: DynamicTextures
-version: 1.3.0
+version: ${project.version}
 description: >
   Multiple ResourcePacks for one server! With DynamicTextures you can set
   a ResourcePack for each world, or even WorldGuard region.
