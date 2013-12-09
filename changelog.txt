@@ -5,7 +5,10 @@ Key:
   = Fix
   ! Change
   - Removal
-  
+
+Version 1.3.0 | Tested on CB 1.7.2-R0.1
+ ! Updated for Resource Packs
+
 Version 1.2.3 | Tested on CB 1.5.2-R0.1
  + Added command to refresh the texturepacks of all players
  + Added an Update Checker

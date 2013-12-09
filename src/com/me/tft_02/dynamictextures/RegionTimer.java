@@ -27,7 +27,7 @@ public class RegionTimer implements Runnable {
                 }
 
                 String url = RegionUtils.getRegionTexturePackUrl(region);
-                player.setTexturePack(url);
+                Utils.setTexturePack(player, url);
                 RegionUtils.regionData.put(player.getName(), region);
             }
         }

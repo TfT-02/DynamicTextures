@@ -11,6 +11,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import com.me.tft_02.dynamictextures.util.Metrics;
+
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class DynamicTextures extends JavaPlugin {
@@ -64,10 +66,10 @@ public class DynamicTextures extends JavaPlugin {
         config.addDefault("General.stats_tracking_enabled", true);
         config.addDefault("General.update_check_enabled", true);
         for (World world : getServer().getWorlds()) {
-            config.addDefault("Worlds." + world.getName().toLowerCase(), "http://url_to_the_texture_pack_here");
+            config.addDefault("Worlds." + world.getName().toLowerCase(), "http://url_to_the_resource_pack_here");
         }
-        config.addDefault("Permissions.custom_perm_name", "http://url_to_the_texture_pack_here");
-        config.addDefault("WorldGuard_Regions.region_name", "http://url_to_the_texture_pack_here");
+        config.addDefault("Permissions.custom_perm_name", "http://url_to_the_resource_pack_here");
+        config.addDefault("WorldGuard_Regions.region_name", "http://url_to_the_resource_pack_here");
         config.options().copyDefaults(true);
         saveConfig();
     }
