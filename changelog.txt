@@ -7,7 +7,9 @@ Key:
   - Removal
 
 Version 1.3.0 | Tested on CB 1.7.2-R0.1
- ! Updated for Resource Packs
+ + Updated for Resource Packs using Packets (enable this option in config.yml)
+ ! Renamed 'dynamictextures.change_texturepack' permission node to 'dynamictextures.resourcepack'
+ ! Changed loading to be post world to ensure all worlds are detected
 
 Version 1.2.3 | Tested on CB 1.5.2-R0.1
  + Added command to refresh the texturepacks of all players
