@@ -89,7 +89,6 @@ public class DynamicTextures extends JavaPlugin {
         final FileConfiguration config = this.getConfig();
         config.addDefault("General.Stats_Tracking", true);
         config.addDefault("General.Update_Check", true);
-        config.addDefault("General.Use_Packets", false);
         for (World world : getServer().getWorlds()) {
             config.addDefault("Worlds." + world.getName().toLowerCase(), "http://url_to_the_resource_pack_here");
         }

@@ -49,7 +49,7 @@ public class Commands implements CommandExecutor {
         sender.sendMessage(ChatColor.GREEN + "Refreshing textures for all players.");
 
         for (Player player : DynamicTextures.p.getServer().getOnlinePlayers()) {
-            Misc.loadTexturePack(player);
+            Misc.loadResourcePack(player);
             player.sendMessage(ChatColor.GREEN + "Refreshing textures...");
         }
 
@@ -66,7 +66,7 @@ public class Commands implements CommandExecutor {
         sender.sendMessage(ChatColor.GREEN + "Configuration reloaded.");
 
         if (sender instanceof Player) {
-            Misc.loadTexturePack((Player) sender);
+            Misc.loadResourcePack((Player) sender);
         }
 
         return true;

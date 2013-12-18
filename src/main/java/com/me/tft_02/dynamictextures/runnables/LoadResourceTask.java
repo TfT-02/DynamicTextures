@@ -14,6 +14,6 @@ public class LoadResourceTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        Misc.loadTexturePack(player);
+        Misc.loadResourcePack(player);
     }
 }

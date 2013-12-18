@@ -19,6 +19,6 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerChangedWorldEvent(PlayerChangedWorldEvent event) {
-        Misc.loadTexturePack(event.getPlayer());
+        Misc.loadResourcePack(event.getPlayer());
     }
 }

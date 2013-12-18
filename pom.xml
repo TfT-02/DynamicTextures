@@ -84,13 +84,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>LATEST</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.mcstats.bukkit</groupId>
             <artifactId>metrics</artifactId>
             <version>R7</version>
