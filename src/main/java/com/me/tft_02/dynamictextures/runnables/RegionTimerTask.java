@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.me.tft_02.dynamictextures.DynamicTextures;
+import com.me.tft_02.dynamictextures.util.Misc;
 import com.me.tft_02.dynamictextures.util.RegionUtils;
 
 public class RegionTimerTask extends BukkitRunnable {
@@ -19,18 +20,24 @@ public class RegionTimerTask extends BukkitRunnable {
             Location location = player.getLocation();
 
             if (!RegionUtils.isTexturedRegion(location)) {
-                break;
+                continue;
             }
 
             String region = RegionUtils.getRegion(location);
 
             if (RegionUtils.getPreviousRegion(player).equals(region)) {
-                break;
+                continue;
             }
 
             String url = RegionUtils.getRegionTexturePackUrl(region);
+
+            if (Misc.isValidUrl(url)) {
+                DynamicTextures.p.getServer().getLogger().warning("Url for Region resource pack is invalid: " + url);
+                continue;
+            }
+
             player.setResourcePack(url);
-            RegionUtils.regionData.put(player.getName(), region);
+            RegionUtils.setPreviousRegion(player, region);
         }
     }
 }

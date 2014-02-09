@@ -1,6 +1,6 @@
 package com.me.tft_02.dynamictextures.util;
 
-import java.util.Arrays;
+import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -20,13 +20,14 @@ public class Misc {
         String world = player.getWorld().getName().toLowerCase();
         url = DynamicTextures.p.getConfig().getString("Worlds." + world);
 
-        String[] texturePermissions = DynamicTextures.p.getConfig().getConfigurationSection("Permissions").getKeys(false).toArray(new String[0]);
+        Set<String> texturePermissions = DynamicTextures.p.getConfig().getConfigurationSection("Permissions").getKeys(false);
 
-        for (String name : Arrays.asList(texturePermissions)) {
+        for (String name : texturePermissions) {
             if (player.hasPermission("dynamictextures." + name)) {
                 String permission_url = DynamicTextures.p.getConfig().getString("Permissions." + name);
-                if ((permission_url.contains("http://") || permission_url.contains("https://")) && permission_url.contains(".zip")) {
-                    url = DynamicTextures.p.getConfig().getString("Permissions." + name);
+
+                if (isValidUrl(permission_url)) {
+                    url = permission_url;
                 }
             }
         }
@@ -35,13 +36,17 @@ public class Misc {
             String region = RegionUtils.getRegion(location);
 
             if (!RegionUtils.getPreviousRegion(player).equals(region)) {
-                RegionUtils.regionData.put(player.getName(), region);
+                RegionUtils.setPreviousRegion(player, region);
                 url = RegionUtils.getRegionTexturePackUrl(region);
             }
         }
 
-        if ((url != null) && (url.contains("http://") || url.contains("https://")) && url.contains(".zip")) {
+        if (isValidUrl(url)) {
             player.setResourcePack(url);
         }
+    }
+
+    public static boolean isValidUrl(String url) {
+        return ((url != null) && (url.contains("http://") || url.contains("https://")) && url.contains(".zip"));
     }
 }

@@ -1,8 +1,8 @@
 package com.me.tft_02.dynamictextures.util;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -14,31 +14,28 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class RegionUtils {
-    public static HashMap<String, String> regionData = new HashMap<String, String>();
+    private final static HashMap<String, String> regionData = new HashMap<String, String>();
 
     public static boolean isTexturedRegion(Location location) {
-        if (getRegionTexturePackUrl(getRegion(location)) != null) {
-            return true;
+        Set<String> worldGuardRegions = DynamicTextures.p.getConfig().getConfigurationSection("WorldGuard_Regions").getKeys(false);
+
+        for (String name : worldGuardRegions) {
+            if (getRegion(location).equalsIgnoreCase("[" + name + "]")) {
+                return true;
+            }
         }
+
         return false;
     }
 
     public static String getRegionTexturePackUrl(String region) {
-        String[] worldGuardRegions = DynamicTextures.p.getConfig().getConfigurationSection("WorldGuard_Regions").getKeys(false).toArray(new String[0]);
+        String url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + region);
 
-        String url = null;
-        for (String name : Arrays.asList(worldGuardRegions)) {
-            if (!region.equalsIgnoreCase("[" + name + "]")) {
-                break;
-            }
-
-            String temp_url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + name);
-            if ((temp_url.contains("http://") || temp_url.contains("https://")) && temp_url.contains(".zip")) {
-                url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + name);
-            }
+        if (Misc.isValidUrl(url)) {
+            return url;
         }
 
-        return url;
+        return null;
     }
 
     public static String getRegion(Location location) {
@@ -60,7 +57,12 @@ public class RegionUtils {
         for (String name : parentNames) {
             regions.remove(name);
         }
+
         return regions.toString();
+    }
+
+    public static void setPreviousRegion(Player player, String region) {
+        regionData.put(player.getName(), region);
     }
 
     public static String getPreviousRegion(Player player) {
@@ -70,6 +72,7 @@ public class RegionUtils {
         if (regionData.containsKey(playerName)) {
             region = regionData.get(playerName);
         }
+
         return region;
     }
 }

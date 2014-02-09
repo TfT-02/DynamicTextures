@@ -140,7 +140,6 @@ public class DynamicTextures extends JavaPlugin {
             metrics.start();
         }
         catch (IOException e) {
-            System.out.println("Failed to submit stats.");
         }
     }
 }
