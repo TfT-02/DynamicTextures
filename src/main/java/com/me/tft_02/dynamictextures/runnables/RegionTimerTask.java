@@ -31,7 +31,7 @@ public class RegionTimerTask extends BukkitRunnable {
 
             String url = RegionUtils.getRegionTexturePackUrl(region);
 
-            if (!Misc.isValidUrl(url)) {
+            if (!Misc.isValidUrl(url) && !url.contains("url_to_the_resource_pack_here")) {
                 DynamicTextures.p.getServer().getLogger().warning("Url for Region resource pack is invalid: " + url);
                 continue;
             }
