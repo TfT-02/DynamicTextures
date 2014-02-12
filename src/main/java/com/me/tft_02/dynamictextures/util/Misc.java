@@ -47,6 +47,6 @@ public class Misc {
     }
 
     public static boolean isValidUrl(String url) {
-        return ((url != null) && (url.contains("http://") || url.contains("https://")) && url.contains(".zip"));
+        return ((url != null) && (url.contains("http://") || url.contains("https://")) && url.contains(".zip") && !url.contains("url_to_the_resource_pack_here"));
     }
 }

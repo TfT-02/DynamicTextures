@@ -29,6 +29,7 @@ public class RegionUtils {
     }
 
     public static String getRegionTexturePackUrl(String region) {
+        region = region.substring(1, region.length() - 1);
         String url = DynamicTextures.p.getConfig().getString("WorldGuard_Regions." + region);
 
         if (Misc.isValidUrl(url)) {
