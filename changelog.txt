@@ -6,6 +6,9 @@ Key:
   ! Change
   - Removal
 
+Version 1.3.3
+ ! Changed WorldGuard support. Now using WorldGuard 6
+
 Version 1.3.2 | Tested on CB 1.7.2-R0.3
  = Fixed region textures
 
