@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -16,11 +17,21 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 public class RegionUtils {
     private final static HashMap<String, String> regionData = new HashMap<String, String>();
 
-    public static boolean isTexturedRegion(Location location) {
+    public static boolean isTexturedRegion(Location location, Player... p) {
+    	String region = getRegion(location);
         Set<String> worldGuardRegions = DynamicTextures.p.getConfig().getConfigurationSection("WorldGuard_Regions").getKeys(false);
 
+        // first of all, check whether we're actually in any region at all
+        if (region.equals("[]") && p.length == 1 && !getPreviousRegion(p[0]).equals("[]")) {
+        	// we are not in a region but we just left one - try to use one of the other options
+        	Misc.loadResourcePack(p[0]);
+        	setPreviousRegion(p[0], "[]");
+        	return false;
+        }
+
         for (String name : worldGuardRegions) {
-            if (getRegion(location).equalsIgnoreCase("[" + name + "]")) {
+            if (region.equalsIgnoreCase("[" + name + "]")) {
+            	Bukkit.getLogger().info("region match (" + name + ")!");
                 return true;
             }
         }
@@ -68,7 +79,7 @@ public class RegionUtils {
 
     public static String getPreviousRegion(Player player) {
         String playerName = player.getName();
-        String region = "null";
+        String region = "[]";
 
         if (regionData.containsKey(playerName)) {
             region = regionData.get(playerName);

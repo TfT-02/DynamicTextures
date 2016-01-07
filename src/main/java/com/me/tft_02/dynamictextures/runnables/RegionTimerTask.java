@@ -19,7 +19,7 @@ public class RegionTimerTask extends BukkitRunnable {
         for (Player player : DynamicTextures.p.getServer().getOnlinePlayers()) {
             Location location = player.getLocation();
 
-            if (!RegionUtils.isTexturedRegion(location)) {
+            if (!RegionUtils.isTexturedRegion(location, player)) {
                 continue;
             }
 
